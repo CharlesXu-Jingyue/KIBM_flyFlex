@@ -1,4 +1,4 @@
-clear all;
+clear;
 % addpath('../figure_tools')
 
 formatSpec = '%d %f %f %f\n';
