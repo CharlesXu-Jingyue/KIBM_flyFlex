@@ -10,6 +10,7 @@ sizeA = [4 Inf];
 
 conditionFolder = uigetdir;
 condition = strsplit(conditionFolder, filesep);
+condition = string(condition{end});
 
 subject = dir(fullfile(conditionFolder, '20*'));
 subjectID = {subject.name};
@@ -37,14 +38,18 @@ for i = 1:nSubject % For each subject
    rawData{2,i} = iTrialData;
 end
 
-clearvars -except condition subjectID trialID rawData
-
-%% Average across subjects for each trial
+clearvars -except condition subjectID trialID rawData conditionFolder condition
 
 %% Compile data to struct
 
-averagedFixation.condition = condition;
-averagedFixation.subjectID = subjectID;
-averagedFixation.trialID = trialID;
-averagedFixation.rawData = rawData;
-averagedFixation.averagedData
+compiledFixation.condition = condition;
+compiledFixation.subjectID = subjectID;
+compiledFixation.trialID = trialID;
+compiledFixation.rawData = rawData;
+
+%% Save data struct
+
+args = input('Save data? yes/no (y/n)','s');
+if (args == "yes") | (args == 'y') %#ok<OR2>
+    save(fullfile(conditionFolder,"compiledFixation_"+condition+".mat"), 'compiledFixation');
+end
