@@ -1,6 +1,6 @@
 %% averageFixation
 % Charles Xu @ UCSD, v1, 20221112
-% Average across subjects against time for each trial under a selected condition
+% Compile fixation data of one selected condition
 
 %% Import data
 
@@ -61,6 +61,8 @@ compiledFixation.trialID = trialID;
 compiledFixation.nTrial = nTrial;
 compiledFixation.rawData = rawData;
 compiledFixation.rawDataMat = rawDataMat;
+
+clearvars -except compiledFixation
 
 args = input('Save data? yes/no (y/n)','s');
 if (args == "yes") | (args == 'y') %#ok<OR2>
